@@ -1,11 +1,12 @@
 const mysql = require("mysql");
 const Sequelize = require("sequelize");
 
-const db = new Sequelize("realtrade", "aleks", "archer22", {
+const db = new Sequelize("realtrade", "aleks", "archer", {
   host: "localhost",
   dialect: "mysql",
   operatorsAliases: false,
   minUptime: 1000,
+  port: 3306,
 
   pool: {
     max: 22,
@@ -15,12 +16,12 @@ const db = new Sequelize("realtrade", "aleks", "archer22", {
     timeout: 60 * 60 * 1000,
     idle: 6000,
     debug: true,
-    waitForConnections: true,
-    port: 3306
+    waitForConnections: true
   }
 });
 
 console.log("db up on port", db.config.port);
+
 /* eslint-enable */
 
 module.exports = db;

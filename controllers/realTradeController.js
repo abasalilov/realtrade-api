@@ -85,73 +85,50 @@ module.exports = {
     let confirmation = "";
     if (userType === "rt_user") {
       const dbAuthReply = await rt_user.findOne({ where: { email: username } });
-
-      console.log("dbAuthReply", dbAuthReply);
-      // .then(dbAuthReply => {
-      //   if (dbAuthReply.dataValues !== null) {
-      //     const { pw } = dbAuthReply.dataValues;
-      //     const confirmation = bcrypt.compareSync(subbedPW, pw);
-      //     if (confirmation) {
-      //       res.status(200).send("Logged In");
-      //     } else {
-      //       res.status(400).send("Username or password are invalid");
-      //     }
-      //   } else {
-      //     res.status(400).send("Username or password are invalid");
-      //   }
-      // })
-      // .catch(dbErr => {
-      //   console.log("dbErr", dbErr);
-      //   return res.status(203).send("Username or password are invalid");
-      // });
+      if (dbAuthReply) {
+        const { pw } = dbAuthReply.dataValues;
+        const confirmation = bcrypt.compareSync(subbedPW, pw);
+        if (confirmation === true) {
+          return res.status(200).send("Logged In");
+        } else {
+          return res.status(203).send("Username or password are invalid");
+        }
+      } else {
+        return res.status(203).send("Username or password are invalid");
+      }
     }
 
     if (userType === "broker") {
-      return broker
-        .findOne({ where: { email: username } })
-        .then(dbAuthReply => {
-          if (dbAuthReply.dataValues !== null) {
-            const { pw } = dbAuthReply.dataValues;
-            const confirmation = bcrypt.compareSync(subbedPW, pw);
-            if (confirmation) {
-              res.status(200).send("Logged In");
-            } else {
-              res.status(400).send("Username or password are invalid");
-            }
-          } else {
-            res.status(400).send("Username or password are invalid");
-          }
-        })
-        .catch(dbErr => {
-          console.log("dbErr", dbErr);
+      const dbAuthReply = await broker.findOne({ where: { email: username } });
+      if (dbAuthReply) {
+        const { pw } = dbAuthReply.dataValues;
+        const confirmation = bcrypt.compareSync(subbedPW, pw);
+        if (confirmation === true) {
+          return res.status(200).send("Logged In");
+        } else {
           return res.status(203).send("Username or password are invalid");
-        });
+        }
+      } else {
+        return res.status(203).send("Username or password are invalid");
+      }
     }
 
     if (userType === "agent") {
-      return agent
-        .findOne({ where: { email: username } })
-        .then(dbAuthReply => {
-          if (dbAuthReply.dataValues !== null) {
-            const { pw } = dbAuthReply.dataValues;
-            const confirmation = bcrypt.compareSync(subbedPW, pw);
-            if (confirmation) {
-              res.status(200).send("Logged In");
-            } else {
-              res.status(400).send("Username or password are invalid");
-            }
-          } else {
-            res.status(400).send("Username or password are invalid");
-          }
-        })
-        .catch(dbErr => {
-          console.log("dbErr", dbErr);
+      const dbAuthReply = await agent.findOne({ where: { email: username } });
+      if (dbAuthReply) {
+        const { pw } = dbAuthReply.dataValues;
+        const confirmation = bcrypt.compareSync(subbedPW, pw);
+        if (confirmation === true) {
+          return res.status(200).send("Logged In");
+        } else {
           return res.status(203).send("Username or password are invalid");
-        });
+        }
+      } else {
+        return res.status(203).send("Username or password are invalid");
+      }
     }
   },
   confirmUniqueUser: async (req, res) => {
-    console.log("req.body", req.body);
     let confirmation = "";
     if (req.body.role === "user") {
       return rt_user
