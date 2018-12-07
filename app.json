@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "real-trade-api",
+      "script": "npm run server",
+      "watch": true,
+      "NODE_ENV": "production"
+    }
+  ]
+}
+
