@@ -1,11 +1,10 @@
 {
   "apps": [
     {
-      "name": "real-trade-api",
+      "name": "gmas-dev-api",
       "script": "npm run server",
       "watch": true,
       "NODE_ENV": "production"
     }
   ]
 }
-
