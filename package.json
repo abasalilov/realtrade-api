@@ -32,7 +32,7 @@
     "instagram-private-api": "git+https://github.com/huttarichard/instagram-private-api.git",
     "is-stream": "^1.1.0",
     "js-md5": "^0.3.0",
-    "json-bigint": "^0.2.0",
+    "json-bigint": "^1.0.0",
     "lodash": "^4.17.11",
     "mkdirp": "^0.5.1",
     "mocha": "^5.2.0",
